@@ -13,6 +13,8 @@ public class Orders {
 	private String description;
 	@Column(columnDefinition="decimal(9,2) NOT NULL DEFAULT 0.0")
 	private double total;
+	@Column(length=30, nullable=false)
+	private String status;
 	
 	@ManyToOne(optional=false) //many orders to one customer (not null)
 	@JoinColumn(name="customerId")
@@ -53,5 +55,16 @@ public class Orders {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 
 }

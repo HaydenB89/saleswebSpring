@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/customers")
@@ -26,6 +27,15 @@ public class CustomerController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Customer>(customer.get(), HttpStatus.OK);
+	}
+	
+	@GetMapping("code/{code}")
+	public ResponseEntity<Customer> getCustomerByCode(@PathVariable String code) {
+		var cust = custRepo.findByCode(code);
+		if(cust.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Customer>(cust.get(), HttpStatus.OK);
 	}
 	
 	@PostMapping
